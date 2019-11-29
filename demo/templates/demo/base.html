@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" href="{% static 'demo/favicon.ico' %}">
+
+	<!-- Bootstrap CSS -->
+	{% block CSSstyle %}
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'demo/main.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	{% endblock %}
+
+	
+	
+	<title>Demo for Metalization Reliability Standard Automation System </title>
+
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+		<div class="container-fluid">
+			<a class="navbar-brand mr-4" href="#">MR.SAS</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarToggle">
+				<div class="navbar-nav mr-auto">
+    				<a class="nav-item nav-link" href="{% url 'demo:dashboard' %}">Dashboard</a>
+					<li class="nav-item dropdown">
+    					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Qualification</a>
+                        <ul class="dropdown-menu dropright" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="#">Project</a></li>
+    					  <li><a class="dropdown-item disabled" href="#">Wafer</a></li>
+    					  <li><a class="dropdown-item disabled" href="#">Reticle</a></li>
+    					  <li><a class="dropdown-item disabled" href="{% url 'demo:chip' filter_id='all' %}">Chip</a></li>
+    					  <li><a class="dropdown-item disabled" href="{% url 'demo:marco' filter_id='all' %}">Marco</a></li>
+    					  <li><a class="dropdown-item disabled" href="{% url 'demo:module' filter_id='all' %}">Module</a></li>
+    					  <li><a class="dropdown-item" href="{% url 'demo:device' filter_id='all' %}">Device</a></li>
+                          <li class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="{% url 'demo:new_protocol' %}">Add new WL protocol</a></li>
+                          <li><a class="dropdown-item" href="{% url 'demo:new_protocol' %}">Add new PL protocol</a></li>
+                        </ul>
+                    </li>
+					<li class="nav-item dropdown">
+    					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reliability Database</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{% url 'demo:testchip' filter_id='all' %}">Test Chip</a>
+                          <a class="dropdown-item disabled" href="{% url 'demo:testmarco' filter_id='all' %}">Test Marco</a>
+                          <a class="dropdown-item disabled" href="{% url 'demo:testmodule' filter_id='all' %}">Test Module</a>
+                          <a class="dropdown-item" href="{% url 'demo:teststructure' filter_id='all' %}">Test Structure</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+					<li class="nav-item dropdown">
+    					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tools</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="#">MAnlagen</a>
+                          <a class="dropdown-item" href="http://ishare.infineon.com/sites/MET_BEOL/SitePages/startpage.aspx" target="_blank">iShare Portal</a>
+                          <a class="dropdown-item" href="#">Time To First Failure calculator</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="{% url 'demo:excel_interface' %}">Excel Interface</a>
+                        </div>
+                    </li>
+                    </li>
+				</div>
+				<!-- Navbar Right Side -->
+				<div class="navbar-nav">
+    				{% if user.is_authenticated %}
+    					<a class="nav-item nav-link" href="{% url 'admin:index' %}">Hi {{user.username}}. Log out</a>
+    				{% else %}
+        				<a class="nav-item nav-link" href="{% url 'admin:index' %}">Log in</a>
+        			{% endif %}
+				</div>
+			</div>
+		</div>
+	</nav>
+		
+    {% block content %}
+    {% endblock %}
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	{% block scripts %}
+    <!--- some scripts that apply to all pages -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    {% endblock %}
+    
+       
+   
+
+   
+</body>
+</html>

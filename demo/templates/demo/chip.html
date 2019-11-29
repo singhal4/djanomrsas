@@ -1,0 +1,46 @@
+{% extends "demo/base.html" %}
+{% block content %}
+	<main role="main" class="container">
+    	<div class="row">
+        	<div class="col-lg-12">
+            <h2>Chip</h2>
+            <br>
+            <table id="dataTable" class="cell-border">
+                <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Device</th>
+                      <th scope="col">Module</th>
+                      <th scope="col">Marco</th>
+                      <th scope="col">Reticle</th>
+                      <th scope="col">Wafer</th>
+                      <th scope="col">Technology</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Owner</th>
+                      <th scope="col">GDS File</th>
+                      <th scope="col">Test Chip</th>
+                    </tr>
+                </thead>
+                <tbody id="data">
+                {% for chip in chips%}
+                <tr>
+                  <td>{{chip.idChip}}</td>
+                  <td></td>
+                  <td></td>
+                  <td><a href="{% url 'demo:marco' filter_id=chip.idChip %}">show list</td>
+                  <td><a href="#">{{chip.reticle.idReticle}}</td>
+                  <td><a href="#">{{chip.reticle.wafer.idWafer}}</td>
+                  <td><a href="#">{{chip.reticle.wafer.technology.name}}</td>
+                  <td>{{chip.description}}</td>
+                  <td>{{chip.owner}}Admin</td>
+                  <td><a href="#">open</a></td>
+                  <td><a href="{% url 'demo:testchip' filter_id=chip.testChip.name %}">{{chip.testChip.name}}</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </main>
+	
+{% endblock content %}

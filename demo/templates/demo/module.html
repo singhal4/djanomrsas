@@ -1,0 +1,46 @@
+{% extends "demo/base.html" %}
+{% block content %}
+	<main role="main" class="container">
+    	<div class="row">
+        	<div class="col-lg-12">
+            <h2>Module</h2>
+            <br>
+			<table id="dataTable" class="cell-border">
+                <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Device</th>
+                      <th scope="col">Marco</th>
+                      <th scope="col">Chip</th>
+                      <th scope="col">Reticle</th>
+                      <th scope="col">Wafer</th>
+                      <th scope="col">Technology</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Owner</th>
+                      <th scope="col">GDS File</th>
+                      <th scope="col">Test Module</th>
+                    </tr>
+                </thead>
+                <tbody id="data">
+                {% for module in modules%}
+                <tr>
+                  <td>{{module.idModule}}</td>
+                  <td><a href="{% url 'demo:device' filter_id=module.idModule %}">show list</td>
+                  <td><a href="{% url 'demo:marco' filter_id=module.marco.idMarco %}">{{module.marco.idMarco}}</td>
+                  <td><a href="{% url 'demo:chip' filter_id=module.marco.chip.idChip %}">{{module.marco.chip.idChip}}</td>
+                  <td><a href="#">{{module.marco.chip.reticle.idReticle}}</td>
+                  <td><a href="#">{{module.marco.chip.reticle.wafer.idWafer}}</td>
+                  <td><a href="#">{{module.marco.chip.reticle.wafer.technology.name}}</td>
+                  <td>{{module.description}}</td>
+                  <td>{{module.owner}}Admin</td>
+                  <td><a href="#">open</a></td>
+                  <td><a href="{% url 'demo:testmodule' filter_id=module.testModule.idTestModule %}">{{module.testModule.name}}</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </main>
+	
+{% endblock content %}

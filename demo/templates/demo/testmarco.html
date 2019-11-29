@@ -1,0 +1,38 @@
+{% extends "demo/base.html" %}
+{% block content %}
+	<main role="main" class="container">
+    	<div class="row">
+        	<div class="col-lg-12">
+            <h2>Test Marco</h2>
+            <br>
+            <table id="dataTable" class="cell-border">
+                <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Test Chip</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Owner</th>
+                      <th scope="col">Definition File</th>
+                      <th scope="col">Marco List</th>
+                    </tr>
+                </thead>
+                <tbody id="data">
+                {% for testmarco in testmarcos%}
+                <tr>
+                  <td>{{testmarco.idTestMarco}}</td>
+                  <td>{{testmarco.name}}</td>
+                  <td><a href="{% url 'demo:testchip' filter_id=testmarco.testChip.name %}">{{testmarco.testChip.name}}</td>
+                  <td>{{testmarco.Description}}</td>
+                  <td>{{testmarco.owner}}Admin</td>
+                  <td><a href="#">open</a></td>
+                  <td><a href="{% url 'demo:marco' filter_id=testmarco.idTestMarco %}">show</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </main>
+	
+{% endblock content %}

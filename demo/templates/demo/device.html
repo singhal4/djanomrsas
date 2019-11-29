@@ -1,0 +1,46 @@
+{% extends "demo/base.html" %}
+{% block content %}
+	<main role="main" class="container">
+    	<div class="row">
+        	<div class="col-lg-12">
+            <h2>Device</h2>
+            <br>
+			<table id="dataTable" class="cell-border">
+                <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Module</th>
+                      <th scope="col">Marco</th>
+                      <th scope="col">Chip</th>
+                      <th scope="col">Reticle</th>
+                      <th scope="col">Wafer</th>
+                      <th scope="col">Technology</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Owner</th>
+                      <th scope="col">GDS File</th>
+                      <th scope="col">Test Structure</th>
+                    </tr>
+                </thead>
+                <tbody id="data">
+                {% for device in devices%}
+                <tr>
+                  <td>{{device.idDevice}}</td>
+                  <td><a href="{% url 'demo:module' filter_id=device.module.idModule %}">{{device.module.idModule}}</td>
+                  <td><a href="{% url 'demo:marco' filter_id=device.module.marco.idMarco %}">{{device.module.marco.idMarco}}</td>
+                  <td><a href="{% url 'demo:chip' filter_id=device.module.marco.chip.idChip %}">{{device.module.marco.chip.idChip}}</td>
+                  <td><a href="#">{{device.module.marco.chip.reticle.idReticle}}</td>
+                  <td><a href="#">{{device.module.marco.chip.reticle.wafer.idWafer}}</td>
+                  <td><a href="#">{{device.module.marco.chip.reticle.wafer.technology.name}}</td>
+                  <td>{{device.description}}</td>
+                  <td>{{device.owner}}Admin</td>
+                  <td><a href="#">open</a></td>
+                  <td><a href="{% url 'demo:teststructure' filter_id=device.testStructure.idTestStructure %}">{{device.testStructure.name}}</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </main>
+	
+{% endblock content %}

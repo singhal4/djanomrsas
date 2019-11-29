@@ -1,0 +1,38 @@
+{% extends "demo/base.html" %}
+{% block content %}
+	<main role="main" class="container">
+    	<div class="row">
+        	<div class="col-lg-12">
+            <h2>Test Module</h2>
+            <br>
+            <table id="dataTable" class="cell-border">
+                <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Test Marco</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Owner</th>
+                      <th scope="col">Definition File</th>
+                      <th scope="col">Module List</th>
+                    </tr>
+                </thead>
+                <tbody id="data">
+                {% for testmodule in testmodules%}
+                <tr>
+                  <td>{{testmodule.idTestModule}}</td>
+                  <td>{{testmodule.name}}</td>
+                  <td><a href="{% url 'demo:testmarco' filter_id=testmodule.testMarco.idTestMarco %}">{{testmodule.testMarco.name}}</td>
+                  <td>{{testmodule.Description}}</td>
+                  <td>{{testmodule.owner}}Admin</td>
+                  <td><a href="#">open</a></td>
+                  <td><a href="{% url 'demo:module' filter_id=testmodule.idTestModule %}">show</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </main>
+	
+{% endblock content %}
